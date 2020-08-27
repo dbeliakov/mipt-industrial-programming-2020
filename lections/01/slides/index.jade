@@ -1,0 +1,291 @@
+doctype html
+html(lang="en")
+    head
+        title Промышленное программирование
+        meta(charset="utf-8")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="../../../common/shower/themes/ribbon/styles/screen-16x10.css")
+        style(type="text/css").
+            .caption {
+                color: #FFF;
+            }
+    body.shower.list
+        header.caption
+            h1 Промышленное программирование
+            p Лекция 1. Version Control (Git)
+        section.slide#cover
+            h2 Лекция 1. Version Control (Git)
+            p Промышленное программирование @ МФТИ, 2020-2021
+            img.cover(src="../../../common/cover.jpg", alt="")
+            style(type="text/css").
+                #cover h2 {
+                    margin: 30px 0 0;
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 70px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p {
+                    margin: 10px 0 0;
+                    text-align: center;
+                    color: #FFF;
+                    font-style: italic;
+                    font-size: 20px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p a {
+                    color: #FFF;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+        section.slide
+            h2 О чем этот курс
+            ul
+                li Процесс разработки
+                li Технологии и подходы
+                li Управление процессом разработки
+
+        section.slide
+            h2 О чем этот курс
+            ul
+                li #[a(href="https://missing.csail.mit.edu/") The Missing Semester of Your CS Education]
+                li Набор знаний, необходимых разработчику, но не преподаваемый в основных курсах
+
+        section.slide
+            h2 Темы лекций
+            ul
+                li Язык Go
+                li Системы контроля версий
+                li Элементы управления проектами
+                li Структура программных продуктов
+                li Системы сборки
+                li CI/CD
+                li Тестирование
+                li Мониторинг
+
+        section.slide
+            h2 Самостоятельная работа
+            ul
+                li Индивидуальные или командные проекты
+                li Проект можно придумать самому
+                li Оцениваться будет не сам проект, а процесс его разработки
+                li Разрешено использовать любые языки, по умолчанию - Go
+
+        section.slide
+            h2 Самостоятельная работа
+            ul
+                li Для обсуждений - #[a(href="https://t.me/joinchat/A1QZuRn0AzFo5_DjLsjcbg") чат в Telegram]
+                img(src="img/qr.png")
+                li Можно спрашивать любые технические вопросы
+
+        section.slide
+            h2 Системы контроля версий
+            img(height="80%", src="img/version-control.png")
+
+        section.slide
+            h2 Системы контроля версий
+            ul
+                li Системы контроля версий (Version Control Systems, VCS) - инструменты, используемые для отслеживания изменений исходного кода (и не только)
+                li Кроме этого, VSC помогают вести совместную работу над проектом, путем внесения атомарных изменений в общей кодовой базе
+                li VSC хранят историю всех изменений над исходным кодом, включая метаданные (авторство, дату, комментарий и пр.), что позволяет понимать, почему текущее состояние выглядит именно так (и, при необходимости, восстанавливать предыдущие версии)
+
+        section.slide
+            h2 Системы контроля версий
+            ul
+                li Кто написал эту часть кода?
+                li Когда была изменена эта конкретная строка кода? Кем? Почему?
+                li Когда среди последних N версий кода что-то пошло не так (сломался тест, хуже - сервис)
+
+        section.slide
+            h2 Централизованные VSC
+            ul
+                li Центральный сервер следит за версиями, клиенты получают файлы из него
+                li Много лет назад это было стандартом
+                li Централизованный сервер является уязвимым местом всей системы - его отказ приводит к остановке работы или даже к потере данных и истории
+                li CVS (середина 80х), Subversion (SVN, 2000)
+        
+        section.slide
+            h2 Распределенные VSC
+            ul
+                li Клиенты полностью копируют (клонируют) весь репозиторий
+                li Изменения в локальных копиях время от времени выгружаются в удаленный репозиторий
+                li При отказе сервера (и отсутствии бэкапов) можно восстановить репозиторий из клиентской копии
+                li Git, Mercurial, Bazaar
+
+        section.slide
+            h2 Git
+            ul
+                li Разработана Линусом Торвальдсом для использования в процессе разработки ядра Linux
+                li Является самой быстрой распределенной VSC, использующей самое компактное хранилище ревизий
+                li Одна из самых популярных VSC, де-факто - стандарт
+                li Интерфейс управления git-репозиторием может показаться сложным
+                li While an ugly interface has to be memorized, a beautiful design can be understood
+        
+        section.slide
+            h2 Git
+            img(height="80%", src="img/git.png")
+
+        section.slide
+            h2 Модель данных
+            ul
+                li В терминах Git файл - это "blob", последовательность байт
+                li Директория - "tree", отображает имена в другие blob'ы и tree
+                li Snapshot - верхнеуровневый tree
+            pre
+                code(style="font-size: 13pt;").
+                    root (tree)
+                    |
+                    +- foo (tree)
+                    |  |
+                    |  + bar.txt (blob, contents = "hello world")
+                    |
+                    +- baz.txt (blob, contents = "git is wonderful")
+
+        section.slide
+            h2 Модель истории
+            ul
+                li История в Git - ориентированный ациклический граф snapshot'ов
+                li Каждый snapshot имеет одного или нескольких родителей
+                li Простейший случай - линейная история, каждый snapshot имеет одного родителя
+                li Множество родителей может появиться, например, в результате слияния (merge) двух веток (branch)
+                li Snapshot в истории называется commit
+
+        section.slide
+            h2 Git
+            pre
+                code(style="font-size: 13pt;").
+                    // a file is a bunch of bytes
+                    type blob = array[byte]
+
+                    // a directory contains named files and directories
+                    type tree = map[string, tree | blob]
+
+                    // a commit has parents, metadata, and the top-level tree
+                    type commit = struct {
+                        parent: array[commit]
+                        author: string
+                        message: string
+                        snapshot: tree
+                    }
+
+        section.slide
+            h2 Адресация
+            ul
+                li Объект (object) - blob, tree или commit
+                li Адрес объекта - SHA-1 хэш его содержания
+            pre
+                code(style="font-size: 13pt;").
+                    type object = blob | tree | commit
+                    objects = map[string, object]
+
+                    def store(object):
+                        id = sha1(object)
+                        objects[id] = object
+
+                    def load(id):
+                        return objects[id]
+        
+        section.slide
+            h2 Адресация
+            ul
+                li Когда tree или commit ссылается на какой-либо объект, он хранит хэш этого объекта
+            pre
+                code(style="font-size: 13pt;").
+                    100644 blob 4448adbf7ecd394f42ae135bbeed9676e894af85    baz.txt
+                    040000 tree c68d233a33c5c06e0340e4c224f0afca87c8ce87    foo
+
+        section.slide
+            h2 Reference
+            ul
+                li Reference - это "человекочитаемые" имена для SHA-1 хэшей
+                li Reference указывает на commit, и они могут быть изменены (и постоянно меняются, например, для указания на более свежий commit)
+                li Специальный reference #[code HEAD] указывает, где мы (наше текущее состояние репозитория) сейчас в истории
+
+        section.slide
+            h2 Репозиторий
+            ul
+                li Git-репозиторий - набор объектов и reference'ов
+                li Данные репозитория хранятся в директории #[code .git] в корне репозитория
+                li Все команды #[code git ...] проводят манипуляции над объектами и reference'ами
+        
+        section.slide
+            h2 Staging
+            ul
+                li Зачастую не хочется иметь в удаленном репозитории все файлы, присутствующие локально (например, артефакты сборки, временные файлы, недоделанные фичи)
+                li При создании commit'а в него входят изменения, явно добавленные в текущий stage
+                li Более того, можно построчно указать, какие изменения должны попасть в текущий коммит
+
+        section.slide
+            h2 Установка git
+            ul
+                li #[a(href="https://githowto.com/ru") Как установить Git] под вашу платформу
+                li #[a(href="https://githowto.com/ru/setup") Настройка Git]
+                li #[a(href="https://githowto.com/ru/aliases") Список полезных сокращений]
+
+        section.slide
+            h2 Команды Git
+            pre
+                code(style="font-size: 13pt;").
+                    git help [command]: get help for a git command
+                    git init: creates a new git repo, with data stored in the .git directory
+                    git status: tells you what’s going on
+                    git add [filename]: adds files to staging area
+                    git commit: creates a new commit
+                    git log: shows a flattened log of history
+                    git log --all --graph --decorate: visualizes history as a DAG
+                    git diff [filename]: show changes you made relative to the staging area
+                    git diff [revision] [filename]: shows differences in a file between snapshots
+                    git checkout [revision]: updates HEAD and current branch
+
+        section.slide
+            h2 Команды Git
+            pre
+                code(style="font-size: 13pt;").
+                    git branch: shows branches
+                    git branch [name]: creates a branch
+                    git checkout -b [name]: creates a branch and switches to it
+                        - same as git branch [name]; git checkout [name]
+                    git merge [revision]: merges into current branch
+                    git rebase: rebase set of patches onto a new base
+                    git cherry-pick: apply the changes introduced by some existing commits
+        
+        section.slide
+            h2 Команды Git
+            pre
+                code(style="font-size: 13pt;").
+                    git remote: list remotes
+                    git remote add [name] [url]: add a remote
+                    git push [remote] [local branch]:[remote branch]: send objects to remote, and update remote reference
+                    git branch --set-upstream-to=[remote]/[remote branch]: set up correspondence between local and remote branch
+                    git fetch: retrieve objects/references from a remote
+                    git pull: same as git fetch; git merge
+                    git clone: download repository from remote
+        
+        section.slide
+            h2 Команды Git
+            pre
+                code(style="font-size: 13pt;").
+                    git commit --amend: edit a commit’s contents/message
+                    git reset HEAD [file]: unstage a file
+                    git checkout -- [file]: discard changes
+
+        section.slide
+            h2 Advanced Git
+            pre
+                code(style="font-size: 13pt;").
+                    git config: Git is highly customizable
+                    git clone --depth=1: shallow clone, without entire version history
+                    git add -p: interactive staging
+                    git rebase -i: interactive rebasing
+                    git blame: show who last edited which line
+                    git stash: temporarily remove modifications to working directory
+                    git bisect: binary search history (e.g. for regressions)
+                    .gitignore: specify intentionally untracked files to ignore
+
+                                
+
+        div(class="progress")
+        script(src="../../../common/shower/shower.min.js")

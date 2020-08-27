@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><title>Промышленное программирование</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../common/shower/themes/ribbon/styles/screen-16x10.css"><style type="text/css">.caption {
+    color: #FFF;
+}</style></head><body class="shower list"><header class="caption"><h1>Промышленное программирование</h1><p>Лекция 1. Version Control (Git)</p></header><section id="cover" class="slide"><h2>Лекция 1. Version Control (Git)</h2><p>Промышленное программирование @ МФТИ, 2020-2021</p><img src="../../../common/cover.jpg" alt="" class="cover"><style type="text/css">#cover h2 {
+    margin: 30px 0 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 70px;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}
+#cover p {
+    margin: 10px 0 0;
+    text-align: center;
+    color: #FFF;
+    font-style: italic;
+    font-size: 20px;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}
+#cover p a {
+    color: #FFF;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}</style></section><section class="slide"><h2>О чем этот курс</h2><ul><li>Процесс разработки</li><li>Технологии и подходы</li><li>Управление процессом разработки</li></ul></section><section class="slide"><h2>О чем этот курс</h2><ul><li><a href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a></li><li>Набор знаний, необходимых разработчику, но не преподаваемый в основных курсах</li></ul></section><section class="slide"><h2>Темы лекций</h2><ul><li>Язык Go</li><li>Системы контроля версий</li><li>Элементы управления проектами</li><li>Структура программных продуктов</li><li>Системы сборки</li><li>CI/CD</li><li>Тестирование</li><li>Мониторинг</li></ul></section><section class="slide"><h2>Самостоятельная работа</h2><ul><li>Индивидуальные или командные проекты</li><li>Проект можно придумать самому</li><li>Оцениваться будет не сам проект, а процесс его разработки</li><li>Разрешено использовать любые языки, по умолчанию - Go</li></ul></section><section class="slide"><h2>Самостоятельная работа</h2><ul><li>Для обсуждений - <a href="https://t.me/joinchat/A1QZuRn0AzFo5_DjLsjcbg">чат в Telegram</a></li><img src="img/qr.png"><li>Можно спрашивать любые технические вопросы</li></ul></section><section class="slide"><h2>Системы контроля версий</h2><img height="80%" src="img/version-control.png"></section><section class="slide"><h2>Системы контроля версий</h2><ul><li>Системы контроля версий (Version Control Systems, VCS) - инструменты, используемые для отслеживания изменений исходного кода (и не только)</li><li>Кроме этого, VSC помогают вести совместную работу над проектом, путем внесения атомарных изменений в общей кодовой базе</li><li>VSC хранят историю всех изменений над исходным кодом, включая метаданные (авторство, дату, комментарий и пр.), что позволяет понимать, почему текущее состояние выглядит именно так (и, при необходимости, восстанавливать предыдущие версии)</li></ul></section><section class="slide"><h2>Системы контроля версий</h2><ul><li>Кто написал эту часть кода?</li><li>Когда была изменена эта конкретная строка кода? Кем? Почему?</li><li>Когда среди последних N версий кода что-то пошло не так (сломался тест, хуже - сервис)</li></ul></section><section class="slide"><h2>Централизованные VSC</h2><ul><li>Центральный сервер следит за версиями, клиенты получают файлы из него</li><li>Много лет назад это было стандартом</li><li>Централизованный сервер является уязвимым местом всей системы - его отказ приводит к остановке работы или даже к потере данных и истории</li><li>CVS (середина 80х), Subversion (SVN, 2000)</li></ul></section><section class="slide"><h2>Распределенные VSC</h2><ul><li>Клиенты полностью копируют (клонируют) весь репозиторий</li><li>Изменения в локальных копиях время от времени выгружаются в удаленный репозиторий</li><li>При отказе сервера (и отсутствии бэкапов) можно восстановить репозиторий из клиентской копии</li><li>Git, Mercurial, Bazaar</li></ul></section><section class="slide"><h2>Git</h2><ul><li>Разработана Линусом Торвальдсом для использования в процессе разработки ядра Linux</li><li>Является самой быстрой распределенной VSC, использующей самое компактное хранилище ревизий</li><li>Одна из самых популярных VSC, де-факто - стандарт</li><li>Интерфейс управления git-репозиторием может показаться сложным</li><li>While an ugly interface has to be memorized, a beautiful design can be understood</li></ul></section><section class="slide"><h2>Git</h2><img height="80%" src="img/git.png"></section><section class="slide"><h2>Модель данных</h2><ul><li>В терминах Git файл - это "blob", последовательность байт</li><li>Директория - "tree", отображает имена в другие blob'ы и tree</li><li>Snapshot - верхнеуровневый tree</li></ul><pre><code style="font-size: 13pt;">root (tree)
+|
++- foo (tree)
+|  |
+|  + bar.txt (blob, contents = "hello world")
+|
++- baz.txt (blob, contents = "git is wonderful")
+</code></pre></section><section class="slide"><h2>Модель истории</h2><ul><li>История в Git - ориентированный ациклический граф snapshot'ов</li><li>Каждый snapshot имеет одного или нескольких родителей</li><li>Простейший случай - линейная история, каждый snapshot имеет одного родителя</li><li>Множество родителей может появиться, например, в результате слияния (merge) двух веток (branch)</li><li>Snapshot в истории называется commit</li></ul></section><section class="slide"><h2>Git</h2><pre><code style="font-size: 13pt;">// a file is a bunch of bytes
+type blob = array[byte]
+
+// a directory contains named files and directories
+type tree = map[string, tree | blob]
+
+// a commit has parents, metadata, and the top-level tree
+type commit = struct {
+    parent: array[commit]
+    author: string
+    message: string
+    snapshot: tree
+}
+</code></pre></section><section class="slide"><h2>Адресация</h2><ul><li>Объект (object) - blob, tree или commit</li><li>Адрес объекта - SHA-1 хэш его содержания</li></ul><pre><code style="font-size: 13pt;">type object = blob | tree | commit
+objects = map[string, object]
+
+def store(object):
+    id = sha1(object)
+    objects[id] = object
+
+def load(id):
+    return objects[id]
+</code></pre></section><section class="slide"><h2>Адресация</h2><ul><li>Когда tree или commit ссылается на какой-либо объект, он хранит хэш этого объекта</li></ul><pre><code style="font-size: 13pt;">100644 blob 4448adbf7ecd394f42ae135bbeed9676e894af85    baz.txt
+040000 tree c68d233a33c5c06e0340e4c224f0afca87c8ce87    foo
+</code></pre></section><section class="slide"><h2>Reference</h2><ul><li>Reference - это "человекочитаемые" имена для SHA-1 хэшей</li><li>Reference указывает на commit, и они могут быть изменены (и постоянно меняются, например, для указания на более свежий commit)</li><li>Специальный reference <code>HEAD</code> указывает, где мы (наше текущее состояние репозитория) сейчас в истории</li></ul></section><section class="slide"><h2>Репозиторий</h2><ul><li>Git-репозиторий - набор объектов и reference'ов</li><li>Данные репозитория хранятся в директории <code>.git</code> в корне репозитория</li><li>Все команды <code>git ...</code> проводят манипуляции над объектами и reference'ами</li></ul></section><section class="slide"><h2>Staging</h2><ul><li>Зачастую не хочется иметь в удаленном репозитории все файлы, присутствующие локально (например, артефакты сборки, временные файлы, недоделанные фичи)</li><li>При создании commit'а в него входят изменения, явно добавленные в текущий stage</li><li>Более того, можно построчно указать, какие изменения должны попасть в текущий коммит</li></ul></section><section class="slide"><h2>Установка git</h2><ul><li><a href="https://githowto.com/ru">Как установить Git</a> под вашу платформу</li><li><a href="https://githowto.com/ru/setup">Настройка Git</a></li><li><a href="https://githowto.com/ru/aliases">Список полезных сокращений</a></li></ul></section><section class="slide"><h2>Команды Git</h2><pre><code style="font-size: 13pt;">git help [command]: get help for a git command
+git init: creates a new git repo, with data stored in the .git directory
+git status: tells you what’s going on
+git add [filename]: adds files to staging area
+git commit: creates a new commit
+git log: shows a flattened log of history
+git log --all --graph --decorate: visualizes history as a DAG
+git diff [filename]: show changes you made relative to the staging area
+git diff [revision] [filename]: shows differences in a file between snapshots
+git checkout [revision]: updates HEAD and current branch
+</code></pre></section><section class="slide"><h2>Команды Git</h2><pre><code style="font-size: 13pt;">git branch: shows branches
+git branch [name]: creates a branch
+git checkout -b [name]: creates a branch and switches to it
+    - same as git branch [name]; git checkout [name]
+git merge [revision]: merges into current branch
+git rebase: rebase set of patches onto a new base
+git cherry-pick: apply the changes introduced by some existing commits
+</code></pre></section><section class="slide"><h2>Команды Git</h2><pre><code style="font-size: 13pt;">git remote: list remotes
+git remote add [name] [url]: add a remote
+git push [remote] [local branch]:[remote branch]: send objects to remote, and update remote reference
+git branch --set-upstream-to=[remote]/[remote branch]: set up correspondence between local and remote branch
+git fetch: retrieve objects/references from a remote
+git pull: same as git fetch; git merge
+git clone: download repository from remote
+</code></pre></section><section class="slide"><h2>Команды Git</h2><pre><code style="font-size: 13pt;">git commit --amend: edit a commit’s contents/message
+git reset HEAD [file]: unstage a file
+git checkout -- [file]: discard changes
+</code></pre></section><section class="slide"><h2>Advanced Git</h2><pre><code style="font-size: 13pt;">git config: Git is highly customizable
+git clone --depth=1: shallow clone, without entire version history
+git add -p: interactive staging
+git rebase -i: interactive rebasing
+git blame: show who last edited which line
+git stash: temporarily remove modifications to working directory
+git bisect: binary search history (e.g. for regressions)
+.gitignore: specify intentionally untracked files to ignore
+
+            
+</code></pre></section><div class="progress"></div><script src="../../../common/shower/shower.min.js"></script></body></html>
