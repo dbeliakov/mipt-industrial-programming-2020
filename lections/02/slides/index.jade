@@ -1,0 +1,183 @@
+doctype html
+html(lang="en")
+    head
+        title Промышленное программирование
+        meta(charset="utf-8")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="../../../common/shower/themes/ribbon/styles/screen-16x10.css")
+        style(type="text/css").
+            .caption {
+                color: #FFF;
+            }
+    body.shower.list
+        header.caption
+            h1 Промышленное программирование
+            p Лекция 2. Модели ветвления
+        section.slide#cover
+            h2 Лекция 2. Модели ветвления
+            p Промышленное программирование @ МФТИ, 2020-2021
+            img.cover(src="../../../common/cover.jpg", alt="")
+            style(type="text/css").
+                #cover h2 {
+                    margin: 30px 0 0;
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 70px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p {
+                    margin: 10px 0 0;
+                    text-align: center;
+                    color: #FFF;
+                    font-style: italic;
+                    font-size: 20px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p a {
+                    color: #FFF;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+        section.slide
+            h2 Модели ветвления
+            ul
+                li В современной разработке VCS не только про контроль изменений, но и про организацию разработки
+                li VCS позволяют координировать разработку крупного проекта
+                li Модели ветвления (workflow) - практики, упрощающие работу над проектом
+                li Смысл модели ветвления в том, чтобы организовать добавление и публикацию изменений в исходном коде репозитория
+
+        section.slide
+            h2 Модели ветвления
+            ul
+                li Модель ветвления это не правило, которому нужно следовать, а скорее путеводитель
+                li Можете просто выбрать определенные аспекты и сочетать их так как вам нужно
+                li Несколько примеров: Feature Branch Workflow, Gitflow, Trunk-Based Development
+
+        section.slide
+            h2 Feature Branch Workflow
+            ul
+                li Вся работа над новой функциональностью должна производится в отдельной ветке
+                li Такая инкапсуляция облегчает работу нескольких разработчиков над общей функциональностью в рамках одной кодовой базы
+                li Также это значит, что нерабочий код никогда не попадет в ветку master, если процессы интеграции реализованы правильным образом и эффективно обеспечивают контроль качества
+
+        section.slide
+            h2 Feature Branch Workflow
+            ul
+                li Новая функциональность при добавлении должна проходить процесс код-ревью (PR в master)
+                li В PR производится доработка недостатков, выявленных другими разработчиками
+                li В master добавляется уже полностью готовая функциональность
+
+        section.slide
+            h2 Feature Branch Workflow
+            ul
+                li #[code git checkout -b new-feature] (лучше давать осмысленные названия веткам)
+                li #[code git push -u origin new-feature]
+                li #[code git merge new-feature]
+
+        section.slide
+            h2 Trunk-Based Development
+            ul
+                li Trunk-Based Development не является новым подходом. Он был тактически продуман еще в восьмидесятых годах, а с середины девяностых стал набирать популярность. Крупнейшие разработчики программных продуктов, такие как Google и Facebook, широко применяют данный подход в организции разработки
+
+        section.slide
+            h2 Trunk-Based Development
+            ul
+                li Разработчики совместно работают над кодом в одной ветке, называемой «главной» (master в Git)
+                li Второстепенные feature-ветки также могут создаваться, но они имеют короткий срок жизни
+                li Данный подход позволяет разработчикам избежать сложностей связанных со слиянием веток
+
+        section.slide
+            h2 Trunk-Based Development
+            ul
+                li При использовании разработки на основе главной ветки процессы непрерывной интеграции и непрерывной поставки являются критически необходимыми, так как позволяют участникам команды прогнозируемо интегрировать свои наработки в основной код с обеспечением гарантии качества результата
+                li Релизы могут быть в отдельных ветках, отведенных от master, однако коммитить в них можно только hotfix
+                li В master ветке нужно уметь ограничивать неготовый к релизу функционал
+
+        section.slide
+            h2 Gitflow
+            img(src="img/gitflow.png", height="80%")
+
+        section.slide
+            h2 Gitflow
+            ul
+                li Модель ветвления Gitflow была впервые опубликована и стала популярной, благодаря статье #[a(href="https://nvie.com/posts/a-successful-git-branching-model/") Vincent Driessen]
+                li Предполагает выстраивание строгой модели ветвления вокруг релиза проекта, которая дает надежную схему управления крупными проектами
+                li Отлично подходит для проектов, которые имеют спланированный цикл релиза
+
+        section.slide
+            h2 Gitflow
+            ul
+                li Кроме feature-веток в Gitflow используются отдельные ветки для подготовки, поддержки и записи релиза
+                li Gitflow использует собственный набор инструментов #[a(href="https://github.com/nvie/gitflow") git-flow], который легко интегрируется с Git, добавляя новые команды Git
+        
+        section.slide
+            h2 Gitflow
+            ul
+                li В ветке master хранится официальная история релиза, а ветка develop служит в качестве интеграционной ветки для новых функций
+                li Удобно тегировать все коммиты в ветке master номером версии
+                li Ветка develop отводится от ветки master в начале работы над проектом
+
+        section.slide
+            h2 Gitflow
+            ul
+                li #[code git branch develop]
+                li #[code git push -u origin develop]
+                li (при работе с git-flow) #[code git flow init]
+
+        section.slide
+            h2 Gitflow
+            ul
+                li Каждая новая функциональность должна разрабатываться в отдельной ветке
+                li Ветки функций создаются не на основе master, a на основе develop
+                li Когда работа над новой функциональностью завершена, она вливается назад в develop
+                li Новый код не должен отправляться напрямую в master
+
+        section.slide
+            h2 Gitflow
+            img(src="img/gitflow1.png", height="80%")
+        
+        section.slide
+            h2 Gitflow
+            ul
+                li #[code git checkout develop]
+                li #[code git checkout -b feature_branch]
+                li (при работе с git-flow) #[code git flow feature start feature_branch]
+
+        section.slide
+            h2 Gitflow
+            ul
+                li #[code git checkout develop]
+                li #[code git merge feature_branch]
+                li (при работе с git-flow) #[code git flow feature finish feature_branch]
+
+        section.slide
+            h2 Gitflow
+            ul
+                li Когда принято решение о релизе, от ветки develop создается ветка release
+                li Новая функциональность в релиз не добавляется, а только исправляются баги
+                li Когда все готово, ветка release сливается в master, и ей присваивается тег с версией
+                li Кроме этого, она должна быть также слита обратно в ветку develop
+
+        section.slide
+            h2 Gitflow
+            img(src="img/gitflow2.png", height="80%")
+
+        section.slide
+            h2 Gitflow
+            ul
+                li #[code git checkout develop]
+                li #[code git checkout -b release/0.1.0]
+                li (при работе с git-flow) #[code git flow release start 0.1.0]
+
+        section.slide
+            h2 Gitflow
+            ul
+                li #[code git checkout develop]
+                li #[code git merge release/0.1.0]
+                li (при работе с git-flow) #[code git flow release finish '0.1.0']
+
+        div(class="progress")
+        script(src="../../../common/shower/shower.min.js")
