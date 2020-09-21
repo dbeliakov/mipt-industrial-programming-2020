@@ -7,3 +7,4 @@
 * [Введение в программирование на Go](http://golang-book.ru)
 * [Программирование на языке Go](https://www.ozon.ru/context/detail/id/19954705/)
 * [50 оттенков Go: ловушки, подводные камни и распространённые ошибки новичков](https://habr.com/ru/company/mailru/blog/314804/)
+* [Лекции Техносферы: Программирование на Go](https://habr.com/ru/company/mailru/blog/327966/)
