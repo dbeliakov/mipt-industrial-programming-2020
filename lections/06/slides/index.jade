@@ -1,0 +1,121 @@
+doctype html
+html(lang="en")
+    head
+        title Промышленное программирование
+        meta(charset="utf-8")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="../../../common/shower/themes/ribbon/styles/screen-16x10.css")
+        style(type="text/css").
+            .caption {
+                color: #FFF;
+            }
+    body.shower.list
+        header.caption
+            h1 Промышленное программирование
+            p Лекция 5. Чистый код
+        section.slide#cover
+            h2 Лекция 5. Чистый код
+            p Промышленное программирование @ МФТИ, 2020-2021
+            img.cover(src="../../../common/cover.jpg", alt="")
+            style(type="text/css").
+                #cover h2 {
+                    margin: 30px 0 0;
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 70px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p {
+                    margin: 10px 0 0;
+                    text-align: center;
+                    color: #FFF;
+                    font-style: italic;
+                    font-size: 20px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p a {
+                    color: #FFF;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+
+        section.slide
+            h2 Тестирование программного обеспечения
+            p.
+                Заходит однажды тестировщик в бар. Забегает в бар. Пролезает в бар. Танцуя, проникает в бар. Крадется в бар. Врывается в бар. Прыгает в бар
+
+            p и заказывает:
+
+            p.
+                кружку пива, 2 кружки пива, 0 кружек пива, 999999999 кружек пива, ящерицу в стакане, –1 кружку пива, qwertyuip кружек пива.
+
+        section.slide
+            h2 Тестирование программного обеспечения
+            ul
+                li Тестирование программного обеспечения — проверка соответствия между реальным и ожидаемым поведением программы, осуществляемая на конечном наборе тестов, выбранном определенным образом
+                li Одна из техник контроля качества
+
+        section.slide
+            h2 Цели тестирования
+            ul
+                li Повысить вероятность того, что ПО, будет работать правильно при любых обстоятельствах
+                li Повысить вероятность того, что ПО будет соответствовать всем описанным требованиям
+                li Предоставление актуальной информации о состоянии ПО на данный момент
+
+        section.slide
+            h2 Виды тестирования
+            ul
+                li Автоматизированное - unit-тесты, интеграционные тесты, ...
+                li Ручное - самостоятельно или с привлечением QA
+
+        section.slide
+            h2 Виды тестирования
+            ul
+                li Functional testing
+                li GUI Testing
+                li Security and Access Control Testing
+                li Interoperability Testing
+
+        section.slide
+            h2 Виды тестирования
+            ul
+                li Performance and Load Testing
+                li Usability Testing
+                li Failover and Recovery Testing
+                li Regression Testing
+                li ...
+
+        section.slide
+            h2 Виды тестирования
+            ul
+                li Unit Testing
+                li Integration Testing
+                li System Testing
+
+        section.slide
+            h2 Принципы тестирования
+            ul
+                li Тестирование может показать, что дефекты присутствуют, но не может доказать, что их нет.
+                li Полное тестирование с использованием всех комбинаций вводов и предусловий физически невыполнимо, за исключением тривиальных случаев
+                li Чтобы найти дефекты как можно раньше, активности по тестированию должны быть начаты как можно раньше в жизненном цикле разработки ПО
+
+        section.slide
+            h2 Принципы тестирования
+            ul
+                li Усилия тестирования должны быть сосредоточены пропорционально ожидаемой, а позже реальной плотности дефектов по модулям
+                li Тестовые сценарии должны регулярно рецензироваться и корректироваться, новые тесты должны быть разносторонними, чтобы охватить все компоненты ПО
+                li Тестирование выполняется по-разному в зависимости от контекста
+                li Обнаружение и исправление дефектов не помогут, если созданная система не подходит пользователю и не удовлетворяет его ожиданиям и потребностям
+
+        section.slide
+            h2 Статическое тестирование
+            ul
+                li Статическое тестирование производится без запуска исполняемого кода ПО
+                li Код-ревью, линтинг исходного кода, анализ скомпилированного кода
+                li Позволяет найти в том числе ошибки, тяжело обнаруживаемые при динамическом тестировании
+
+        div(class="progress")
+        script(src="../../../common/shower/shower.min.js")
