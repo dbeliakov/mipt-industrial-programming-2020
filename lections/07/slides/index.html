@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><title>Промышленное программирование</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../common/shower/themes/ribbon/styles/screen-16x10.css"><style type="text/css">.caption {
+    color: #FFF;
+}</style></head><body class="shower list"><header class="caption"><h1>Промышленное программирование</h1><p>Лекция 7. Continuous integration (CI)</p></header><section id="cover" class="slide"><h2>Лекция 7. Continuous integration (CI)</h2><p>Промышленное программирование @ МФТИ, 2020-2021</p><img src="../../../common/cover.jpg" alt="" class="cover"><style type="text/css">#cover h2 {
+    margin: 30px 0 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 70px;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}
+#cover p {
+    margin: 10px 0 0;
+    text-align: center;
+    color: #FFF;
+    font-style: italic;
+    font-size: 20px;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}
+#cover p a {
+    color: #FFF;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                 black -1px 1px 0, black 1px -1px 0;
+}
+</style></section><section class="slide"><h2>Continuous Integration</h2><ul><li>Непрерывная интеграция - подход к разработке приложений, подразумевающий частое проведение сборок проекта и тестирование кода</li><li>Цель — сделать процесс интеграции предсказуемым и обнаружить потенциальные баги и ошибки на ранней стадии, чтобы было больше времени на их исправление</li></ul></section><section class="slide"><h2>История</h2><ul><li>Впервые термин Continuous Integration появился в 1991 году (Гради Буч, создатель языка UML)</li><li>Он подразумевал инкрементальное уточнение архитектуры при проектировании объектно-ориентированных систем</li><li>Позже в своей книге "Object-Oriented Analysis and Design with Applications" он сказал, что задача методики — ускорить выпуск «внутренних релизов»</li></ul></section><section class="slide"><h2>История</h2><ul><li>В начале 2000-х методологию непрерывной интеграции стал продвигать один из основателей Agile Alliance Мартин Фаулер </li><li>Его эксперименты с CI привели к появлению первого программного инструмента в этой сфере — CruiseControl</li><li>Цикл сборки в инструменте реализован в виде демона, периодически проверяющего систему управления версиями на изменения в кодовой базе</li></ul></section><section class="slide"><h2>Continuous Integration</h2><ul><li>Согласно исследованию Forrester, в 2009 году 86% из пятидесяти опрошенных технологических компаний использовали или внедряли CI-методы</li><li>В 2018 году крупный облачный провайдер провёл опрос среди ИТ-специалистов компаний из сферы услуг, образования и финансов. Из шести тысяч респондентов 58% ответили, что используют в работе инструменты и принципы CI</li></ul></section><section class="slide"><h2>Continuous Integration</h2><ul><li>Основу непрерывной интеграции составляют два инструмента — система контроля версий и CI-сервер</li><li>Разработчики один или несколько раз в день загружают новый код</li><li>CI-сервер автоматически копирует его со всеми зависимости и выполняет сборку и тестирование</li></ul></section><section class="slide"><h2>Принципы CI</h2><ul><li><b>Немедленно исправлять проблемы</b>. Этот принцип пришёл в CI из <a href="https://en.wikipedia.org/wiki/Extreme_programming">экстремального программирования</a>. Исправление багов — самая приоритетная задача разработчиков</li><li><b>Автоматизировать процессы</b>. Разработчики и менеджеры должны постоянно искать «узкие места» в процессе интеграции и устранять их. Например, часто «бутылочным горлышком» интеграции оказывается тестирование.</li><li><b>Проводить сборки как можно чаще</b>. Раз в день, чтобы синхронизировать работу команды.</li></ul></section><section class="slide"><h2>Сложности внедрения</h2><ul><li>Высокие операционные расходы - на поддержку инфраструктуры большого проекта требуется много человеко-часов</li><li>Непрерывная интеграция повышает нагрузку на сотрудников компании (по крайней мере первое время)</li><li>Есть много legacy-проектов, не покрытых автотестами. Бывает, что код надо полностью переписать для полноценного внедрения CI</li></ul></section><section class="slide"><h2>Инструменты для CI</h2><ul><li><a href="https://www.jenkins.io/">Jenkins</a></li><li><a href="https://docs.gitlab.com/ee/ci/">Gitlab CI</a></li><li><a href="https://drone.io/">Drone CI</a></li><li><a href="https://www.jetbrains.com/ru-ru/teamcity/">Teamcity</a></li><li><a href="https://github.com/features/actions">GitHub Actions</a></li></ul></section><section class="slide"><h2>CI системы</h2><img src="img/ci.jpeg" style="width: 80%"></section><section class="slide"><h2>GitHub Actions</h2><ul><li>Workflow - автоматизированная процедура, добавляемая в репозиторий. Может состоять из нескольких задач, которые запускаются по какому-либо событию</li><li>Event - специфичное событие, которое тригерит workflow. <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows">Список возможных событий</a></li><li>Job - набор шагов, выполняемых последовательно или параллельно. Job может зависить от результата выполнения другой</li></ul></section><section class="slide"><h2>GitHub Actions</h2><ul><li>Step - индивидуальная задача, которая запускает команду (action). Данные от предыдущего шага доступны в последующих</li><li>Action - набор шагов, который можно использовать как "кирпичик" в своем workflow</li><li>Runner - сервер, на котором установлено соответствующее ПО для запуска задач. Может быть GitHub-hosted и self-hosted</li></ul></section><section class="slide"><h2>GitHub Actions</h2><pre><code style="font-size: 13pt;">name: learn-github-actions
+on: [push]
+jobs:
+check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: npm install -g bats
+    - run: bats -v
+</code></pre></section><div class="progress"></div><script src="../../../common/shower/shower.min.js"></script></body></html>

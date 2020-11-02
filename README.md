@@ -1,6 +1,7 @@
 # Промышленное программирование
 
-[Список проектов](projects/projects.md)
+[Список проектов](projects/projects.md)  
+[Задания](projects/tasks.md)  
 [Пример проекта](https://github.com/dbeliakov/stocks-bot)
 
 1. [Version Control (Git)](lections/01)
@@ -9,3 +10,4 @@
 4. [Язык программирования Go (продолжение)](lections/04)
 5. [Чистый код](lections/05)
 6. [Тестирование](lections/06)
+7. [Continuous integration (CI)](lections/07)

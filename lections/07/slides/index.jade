@@ -1,0 +1,135 @@
+doctype html
+html(lang="en")
+    head
+        title Промышленное программирование
+        meta(charset="utf-8")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="../../../common/shower/themes/ribbon/styles/screen-16x10.css")
+        style(type="text/css").
+            .caption {
+                color: #FFF;
+            }
+    body.shower.list
+        header.caption
+            h1 Промышленное программирование
+            p Лекция 7. Continuous integration (CI)
+        section.slide#cover
+            h2 Лекция 7. Continuous integration (CI)
+            p Промышленное программирование @ МФТИ, 2020-2021
+            img.cover(src="../../../common/cover.jpg", alt="")
+            style(type="text/css").
+                #cover h2 {
+                    margin: 30px 0 0;
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 70px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p {
+                    margin: 10px 0 0;
+                    text-align: center;
+                    color: #FFF;
+                    font-style: italic;
+                    font-size: 20px;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+                #cover p a {
+                    color: #FFF;
+                    text-shadow: black 1px 1px 0, black -1px -1px 0, 
+                                 black -1px 1px 0, black 1px -1px 0;
+                }
+
+        section.slide
+            h2 Continuous Integration
+            ul
+                li Непрерывная интеграция - подход к разработке приложений, подразумевающий частое проведение сборок проекта и тестирование кода
+                li Цель — сделать процесс интеграции предсказуемым и обнаружить потенциальные баги и ошибки на ранней стадии, чтобы было больше времени на их исправление
+
+        section.slide
+            h2 История
+            ul
+                li Впервые термин Continuous Integration появился в 1991 году (Гради Буч, создатель языка UML)
+                li Он подразумевал инкрементальное уточнение архитектуры при проектировании объектно-ориентированных систем
+                li Позже в своей книге "Object-Oriented Analysis and Design with Applications" он сказал, что задача методики — ускорить выпуск «внутренних релизов»
+
+        section.slide
+            h2 История
+            ul
+                li В начале 2000-х методологию непрерывной интеграции стал продвигать один из основателей Agile Alliance Мартин Фаулер 
+                li Его эксперименты с CI привели к появлению первого программного инструмента в этой сфере — CruiseControl
+                li Цикл сборки в инструменте реализован в виде демона, периодически проверяющего систему управления версиями на изменения в кодовой базе
+
+        section.slide
+            h2 Continuous Integration
+            ul
+                li Согласно исследованию Forrester, в 2009 году 86% из пятидесяти опрошенных технологических компаний использовали или внедряли CI-методы
+                li В 2018 году крупный облачный провайдер провёл опрос среди ИТ-специалистов компаний из сферы услуг, образования и финансов. Из шести тысяч респондентов 58% ответили, что используют в работе инструменты и принципы CI
+
+        section.slide
+            h2 Continuous Integration
+            ul
+                li Основу непрерывной интеграции составляют два инструмента — система контроля версий и CI-сервер
+                li Разработчики один или несколько раз в день загружают новый код
+                li CI-сервер автоматически копирует его со всеми зависимости и выполняет сборку и тестирование
+        
+        section.slide
+            h2 Принципы CI
+            ul
+                li #[b Немедленно исправлять проблемы]. Этот принцип пришёл в CI из #[a(href="https://en.wikipedia.org/wiki/Extreme_programming") экстремального программирования]. Исправление багов — самая приоритетная задача разработчиков
+                li #[b Автоматизировать процессы]. Разработчики и менеджеры должны постоянно искать «узкие места» в процессе интеграции и устранять их. Например, часто «бутылочным горлышком» интеграции оказывается тестирование.
+                li #[b Проводить сборки как можно чаще]. Раз в день, чтобы синхронизировать работу команды.
+
+        section.slide
+            h2 Сложности внедрения
+            ul
+                li Высокие операционные расходы - на поддержку инфраструктуры большого проекта требуется много человеко-часов
+                li Непрерывная интеграция повышает нагрузку на сотрудников компании (по крайней мере первое время)
+                li Есть много legacy-проектов, не покрытых автотестами. Бывает, что код надо полностью переписать для полноценного внедрения CI
+
+        section.slide
+            h2 Инструменты для CI
+            ul
+                li #[a(href="https://www.jenkins.io/") Jenkins]
+                li #[a(href="https://docs.gitlab.com/ee/ci/") Gitlab CI]
+                li #[a(href="https://drone.io/") Drone CI]
+                li #[a(href="https://www.jetbrains.com/ru-ru/teamcity/") Teamcity]
+                li #[a(href="https://github.com/features/actions") GitHub Actions]
+
+        section.slide
+            h2 CI системы
+            img(src="img/ci.jpeg", style="width: 80%")
+
+        section.slide
+            h2 GitHub Actions
+            ul
+                li Workflow - автоматизированная процедура, добавляемая в репозиторий. Может состоять из нескольких задач, которые запускаются по какому-либо событию
+                li Event - специфичное событие, которое тригерит workflow. #[a(href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows") Список возможных событий]
+                li Job - набор шагов, выполняемых последовательно или параллельно. Job может зависить от результата выполнения другой
+        
+        section.slide
+            h2 GitHub Actions
+            ul
+                li Step - индивидуальная задача, которая запускает команду (action). Данные от предыдущего шага доступны в последующих
+                li Action - набор шагов, который можно использовать как "кирпичик" в своем workflow
+                li Runner - сервер, на котором установлено соответствующее ПО для запуска задач. Может быть GitHub-hosted и self-hosted
+
+        section.slide
+            h2 GitHub Actions
+            pre
+                code(style="font-size: 13pt;").
+                    name: learn-github-actions
+                    on: [push]
+                    jobs:
+                    check-bats-version:
+                        runs-on: ubuntu-latest
+                        steps:
+                        - uses: actions/checkout@v2
+                        - uses: actions/setup-node@v1
+                        - run: npm install -g bats
+                        - run: bats -v
+
+        div(class="progress")
+        script(src="../../../common/shower/shower.min.js")
