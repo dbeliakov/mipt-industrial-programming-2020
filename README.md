@@ -11,3 +11,4 @@
 5. [Чистый код](lections/05)
 6. [Тестирование](lections/06)
 7. [Continuous integration (CI)](lections/07)
+8. [Continuous delivery (CD)](lections/08)
