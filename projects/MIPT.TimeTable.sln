@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIPT.BotApi", "MIPT.BotApi\MIPT.BotApi.csproj", "{F5C7B0AE-EE8C-4D50-82A3-263D1D777E7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIPT.Common", "MIPT.Common\MIPT.Common.csproj", "{465AA340-CB67-4148-8CDB-DE3328AF916C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIPT.Dal", "MIPT.Dal\MIPT.Dal.csproj", "{89124782-09FA-4E57-A622-59216AC4D4DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5C7B0AE-EE8C-4D50-82A3-263D1D777E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C7B0AE-EE8C-4D50-82A3-263D1D777E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C7B0AE-EE8C-4D50-82A3-263D1D777E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C7B0AE-EE8C-4D50-82A3-263D1D777E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{465AA340-CB67-4148-8CDB-DE3328AF916C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{465AA340-CB67-4148-8CDB-DE3328AF916C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{465AA340-CB67-4148-8CDB-DE3328AF916C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{465AA340-CB67-4148-8CDB-DE3328AF916C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89124782-09FA-4E57-A622-59216AC4D4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89124782-09FA-4E57-A622-59216AC4D4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89124782-09FA-4E57-A622-59216AC4D4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89124782-09FA-4E57-A622-59216AC4D4DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
